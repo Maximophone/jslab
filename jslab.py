@@ -46,6 +46,10 @@ def ants():
 def lightengine():
     return render_template('generic_page.html', experiment='js/lightengine.js')
 
+@app.route('/physics2d')
+def physics2d():
+    return render_template('generic_page.html', experiment='js/2dphysics.js')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None
