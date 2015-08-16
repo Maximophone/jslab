@@ -1,0 +1,33 @@
+<!doctype html>
+<title>JS Lab</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+<script src="{{ url_for('static', filename='lib/processing.js') }}"></script>
+<div class=page>
+  <h1>JS Lab</h1>
+  <div class=metanav>
+  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  <table class=pagelayout>
+    <tr>
+      <td>
+        <div class=sidemenu>
+          <ul>
+            <li><a href="{{ url_for('ants') }}">Ants</a></li>
+            <li>Second
+            </li>
+          </ul>
+        </div>
+      </td>
+      <td>
+      {% for message in get_flashed_messages() %}
+        <div class=flash>{{ message }}</div>
+      {% endfor %}
+      {% block body %}{% endblock %}
+      </td>
+    </tr>
+  </table>
+</div>
