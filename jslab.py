@@ -34,12 +34,6 @@ def teardown_request(exception):
     if db is not None:
         db.close()
 
-# @app.route('/')
-# def show_entries():
-#     cur = g.db.execute('select title, text from entries order by id desc')
-#     entries = [dict(title=row[0], text=row[1]) for row in cur.fetchall()]
-#     return render_template('show_entries.html', entries=entries)
-
 @app.route('/')
 def index_page():
     return render_template('generic_page.html', experiment='')
@@ -47,6 +41,10 @@ def index_page():
 @app.route('/ants')
 def ants():
     return render_template('generic_page.html', experiment='js/ants.js')
+
+@app.route('/lightengine')
+def lightengine():
+    return render_template('generic_page.html', experiment='js/lightengine.js')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():

@@ -1,5 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-  <p><canvas id="canvas1" width="400" height="400"></canvas></p>
+  <div class="canvas">
+    <p><canvas id="canvas1" width="400" height="400"></canvas></p>
+  </div>
   <script src="{{ url_for('static', filename=experiment) }}" type="text/javascript"></script>
+
 {% endblock %}
