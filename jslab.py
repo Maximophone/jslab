@@ -50,6 +50,10 @@ def lightengine():
 def physics2d():
     return render_template('generic_page.html', experiment='js/2dphysics.js')
 
+@app.route('/sphere')
+def sphere():
+    return render_template('generic_page.html', experiment='js/pixels.js')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     error = None

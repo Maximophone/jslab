@@ -43,8 +43,8 @@ Try and play around with the following variables :
 */
 var nAnts = 10; //NUMBER OF ANTS AT START
 var ageing=true; //Will ants die of ageing? true=yes,false=no
-var LifeExpectancy = 10000; //Life expectancy, 1000=1min
-var HungerThreshold = 1000; //Time before hunpger, 1000=1min
+var LifeExpectancy = 15000; //Life expectancy, 1000=1min
+var HungerThreshold = 2000; //Time before hunger, 1000=1min
 var InitialFoodNest = 10; //Initial amount of food in the nest
 
 var debugMode=false; //Toggle debug mode. Handle with care ;)
@@ -136,8 +136,11 @@ var sliderPress=false;
 var Decomposition = 1000;
 var drawPheromones = true;
 var pause = false;
-var QUEENMAXBIRTHRATE=0.02;
+var QUEENMAXBIRTHRATE=0.005;
 var BIRTHRATESTEP = QUEENMAXBIRTHRATE/8000;
+
+var FOODMIN = 50;
+var FOODVARIABLE = 100;
 
 var mouseIsPressed = false;
 
@@ -555,8 +558,9 @@ var ant = function(x,y,size,angle,speed)
     this.aim = [random(limX)-limX/2,random(limY)-limY/2];
     this.memoryAim = [0,0];
     this.foodQuantity = 0;
-    this.foodCapacity = 0.5;
-    this.viewRadius = 150;
+    this.foodCapacity = 5;
+    this.gatheringRate = 0.25*this.size;
+    this.viewRadius = 150; 
     this.viewAngle = 170;
     this.smellRadius = 300;
     this.carryFood = false;
@@ -703,7 +707,7 @@ else
     
     this.foodGather = function(food)
     {
-        var q = 0.02*this.size;
+        var q = this.gatheringRate;
         q=food.removeQuantity(q);
         this.foodQuantity+=q;
     };
@@ -1202,7 +1206,7 @@ var mouseReleased = function() {
     }
     else
     {
-        world.foodmap.push(new food((processing.mouseX-translateX)*currentScale,(processing.mouseY-translateY)*currentScale, random(40)+40));
+        world.foodmap.push(new food((processing.mouseX-translateX)*currentScale,(processing.mouseY-translateY)*currentScale, random(FOODVARIABLE)+FOODMIN));
     }
 };
 
